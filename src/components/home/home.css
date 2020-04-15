@@ -1,0 +1,28 @@
+.cardContent {
+  border-radius: 0.8em !important;
+}
+.sectionPadding {
+  padding: 25px;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+.modal-contentTopMargin {
+  margin-top: 112px;
+}
+#input1,
+#input2 {
+  border: hidden;
+  outline: none !important;
+  padding: 0;
+}
+#input1:focus,
+#input2:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+.image-parent {
+  max-width: 40px;
+}
