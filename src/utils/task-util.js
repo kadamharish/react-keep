@@ -74,7 +74,7 @@ const TaskImageList = ({ tasks, from }) => {
         return (
             val ? <div key={key} style={{ marginBottom: '2px' }} className="media justify-content-between">
                 <div className="media-body ">
-                    {item.text}
+                    {item.isCompleted ? <del>{item.text}</del> : item.text}
                 </div>
                 <div className="media-right">
                     {item.img ? <Image url={item.img} ></Image> : ''}
@@ -183,7 +183,7 @@ export const CustomCheckbox = ({ from, newTaskList, onCheckChange, onTaskDelete,
                             <input key={key} type="checkbox" className="form-check-input" checked={item.isCompleted} onChange={() => { onCheckChange(newTaskList, item) }} id={`defaultCheck` + key} />
                             {item.img ? <Image url={item.img} ></Image> : ''}
                             <label htmlFor={`defaultCheck` + key}>
-                                {item.text}
+                                {item.isCompleted ? <del>{item.text}</del> : item.text}
                             </label>
                         </div>
                         <div className="media-body">
