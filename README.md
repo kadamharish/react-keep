@@ -1,4 +1,3 @@
-
 A web app similar to google keep functionality based on React.js.
 
 -> Users can to create an account.
@@ -26,3 +25,7 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+## Screenshot
+
+1. Signup Screen
+   ![Alt text](./screenshots/signup.png)

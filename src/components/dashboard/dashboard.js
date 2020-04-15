@@ -10,7 +10,7 @@ import Archived from "../archived/archived";
 import Deleted from "../deleted/deleted";
 const { Content } = Layout;
 
-// Exporting Dashboard funcation with routing.
+// Exporting Dashboard component with routing.
 export default function Dashboard() {
 
     return (

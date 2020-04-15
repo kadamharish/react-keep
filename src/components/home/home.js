@@ -7,7 +7,7 @@ import { TaskListCard, TaskModal } from '../../utils/task-util';
 import { getBase64, updateToDB } from '../../utils/utils'
 import { toast } from 'react-toastify';
 
-//Exporting Home class with task/tasklist manipulation functionality.
+//Exporting Home component with task/tasklist manipulation functionality.
 export default class Home extends React.Component {
 
     constructor(props) {

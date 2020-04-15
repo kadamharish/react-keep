@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter, NavLink } from 'react-router-dom';
 import * as Constant from "../../constants"
 
-// Custom header class with navigation links
+// Custom header component with navigation links
 
 class CustomHeader extends React.Component {
 

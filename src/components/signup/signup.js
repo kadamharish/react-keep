@@ -3,7 +3,10 @@ import * as Constant from '../../constants'
 import './signup.css';
 import { withRouter, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// Exporting signup class
+/**
+  * Exporting signup component.
+ * It contains sign up process for user.
+  */
 class Signup extends React.Component {
 
     constructor(props) {

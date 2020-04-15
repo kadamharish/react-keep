@@ -2,8 +2,10 @@ import React from 'react';
 import "./login.css";
 import * as Constant from '../../constants';
 import { withRouter, Link } from 'react-router-dom';
-
-// Exporting Login Class.
+/**
+ * Exporting login component.
+ * It contains login process for user.
+ */
 class Login extends React.Component {
 
     constructor(props) {
