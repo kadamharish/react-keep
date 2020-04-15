@@ -1,6 +1,6 @@
 A web app similar to google keep functionality based on React.js.
 
--> Users can to create an account.
+-> Users can create an account.
 
 -> Users can login into the application with credentials. (email/password)
 
