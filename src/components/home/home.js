@@ -4,6 +4,7 @@ import "./home.css";
 import * as Constant from "../../constants"
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { TaskListCard, TaskModal } from '../../utils/task-util';
+import { getBase64, updateToDB } from '../../utils/utils'
 
 export default class Home extends React.Component {
 
@@ -48,8 +49,11 @@ export default class Home extends React.Component {
         })
     }
 
-
-    onDataUpdate(taskList) {
+    /**
+     * Getting data for modal
+     * @param  {List} taskList 
+     */
+    getDataForModal(taskList) {
         let val;
         let isNew = true;
         if (taskList) {
@@ -71,7 +75,10 @@ export default class Home extends React.Component {
         })
     }
 
-
+    /**
+     * Save updated data to DB
+     * @param  {List} newTaskList 
+    */
     saveTaskList(newTaskList) {
         let oldTaskList = this.state.oldTaskList;
         if (newTaskList.id) {
@@ -88,7 +95,7 @@ export default class Home extends React.Component {
             oldTaskList.push(newTaskList);
         }
 
-        this.updateToDB(oldTaskList);
+        updateToDB(this.state.username, oldTaskList);
         this.setState({
             newTaskList: {
                 title: '',
@@ -100,6 +107,12 @@ export default class Home extends React.Component {
             oldTaskList: oldTaskList
         });
     }
+
+    /**
+     * Adding single task in list
+     * @param  {List} newTaskList 
+     * @param  {Object} taskData 
+     */
     addTask(newTaskList, taskData) {
         let task = {
             id: 'task' + new Date().valueOf(),
@@ -115,6 +128,10 @@ export default class Home extends React.Component {
         })
     }
 
+    /**
+      * Add and remove checkbox for task
+      * @param  {List} newTaskList 
+      */
     addCheckbox(newTaskList) {
         newTaskList.isCheckbox = !newTaskList.isCheckbox;
         this.setState({
@@ -122,6 +139,11 @@ export default class Home extends React.Component {
         })
     }
 
+    /**
+     * Update data On check change 
+     * @param  {List} newTaskList 
+     * @param  {Object} item 
+     */
     onCheckChange(newTaskList, item) {
         newTaskList.tasks.forEach(value => {
             if (item.id === value.id) {
@@ -133,6 +155,11 @@ export default class Home extends React.Component {
         })
     }
 
+    /**
+     * Change taskList title
+     * @param  {List} newTaskList 
+     * @param  {string} title 
+     */
     onTitleChange(newTaskList, title) {
         newTaskList.title = title;
         this.setState({
@@ -140,6 +167,10 @@ export default class Home extends React.Component {
         })
     }
 
+    /**
+     * On Task list delete
+     * @param  {Object} item 
+     */
     onDeleteClick(item) {
         let oldTaskList = this.state.oldTaskList;
         oldTaskList.forEach(value => {
@@ -153,8 +184,13 @@ export default class Home extends React.Component {
         this.setState({
             oldTaskList: oldTaskList
         })
-        this.updateToDB(oldTaskList);
+        updateToDB(this.state.username, oldTaskList);
     }
+
+    /**
+     * On Task list Unarchived
+     * @param  {Object} item 
+     */
     onArchiveClick(item) {
         let oldTaskList = this.state.oldTaskList;
         oldTaskList.forEach(value => {
@@ -168,14 +204,15 @@ export default class Home extends React.Component {
         this.setState({
             oldTaskList: oldTaskList
         })
-        this.updateToDB(oldTaskList);
-    }
-
-    updateToDB(taskList) {
-        localStorage.setItem(this.state.username, JSON.stringify(taskList));
+        updateToDB(this.state.username, oldTaskList);
     }
 
 
+
+    /**
+     * On Task deleted
+     * @param  {string} taskId 
+     */
     onTaskDelete(taskId) {
         let data = this.state.newTaskList;
         data.tasks.forEach(value => {
@@ -189,13 +226,17 @@ export default class Home extends React.Component {
         })
 
     }
-
+    /**
+     * Upload file to DB
+     * @param  {Object} event 
+     * @param  {string} itemId 
+     */
     onFileUpload(event, itemId) {
         let file = event.target.files[0];
 
         let newTaskList = this.state.newTaskList;
 
-        this.getBase64(file, (result) => {
+        getBase64(file, (result) => {
             newTaskList.tasks.forEach(val => {
                 if (val.id === itemId) {
                     val.img = result
@@ -208,17 +249,10 @@ export default class Home extends React.Component {
 
     }
 
-    getBase64(file, cb) {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function () {
-            cb(reader.result)
-        };
-        reader.onerror = function (error) {
-            console.log('Error: ', error);
-        };
-    }
-
+    /**
+     * On Task Archived
+     * @param  {string} taskId 
+     */
     onTaskArchive(taskId) {
         let data = this.state.newTaskList;
         data.tasks.forEach(value => {
@@ -241,7 +275,7 @@ export default class Home extends React.Component {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-sm-3 col-lg-2 col-md-3 col-xs-3">
-                                    <div onClick={() => this.onDataUpdate()} className="card">
+                                    <div onClick={() => this.getDataForModal()} className="card">
                                         <div className="card-body text-center cursorPointer" data-toggle="modal" data-target="#exampleModalCenter">
                                             <PlusCircleOutlined style={{ fontSize: '16px' }} />
                                             <br />
@@ -249,7 +283,7 @@ export default class Home extends React.Component {
                                     </div>
                                     </div>
                                 </div>
-                                <TaskListCard oldTaskList={oldTaskList} from={Constant.FROM_HOME} onDataUpdate={this.onDataUpdate.bind(this)}></TaskListCard>
+                                <TaskListCard oldTaskList={oldTaskList} from={Constant.FROM_HOME} getDataForModal={this.getDataForModal.bind(this)}></TaskListCard>
                             </div>
                         </div>
                     </div>

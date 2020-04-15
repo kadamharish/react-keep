@@ -5,11 +5,11 @@ import { TaskListCard, ModalDismissButton } from '../../utils/task-util';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashRestore } from '@fortawesome/free-solid-svg-icons'
+import { updateToDB } from '../../utils/utils'
 
 export default class Deleted extends React.Component {
     constructor(props) {
         super(props);
-        this.updateToDB = this.updateToDB.bind(this);
         this.singleTaskRestore = this.singleTaskRestore.bind(this);
         this.state = {
             newTaskList: {
@@ -23,7 +23,6 @@ export default class Deleted extends React.Component {
     componentDidMount() {
         const userDetails = JSON.parse(sessionStorage.getItem(Constant.USER_DETAILS));
         const taskList = JSON.parse(localStorage.getItem(userDetails.username));
-        console.log(taskList);
         if (taskList && taskList.length > 0) {
             this.setState({
                 oldTaskList: taskList
@@ -34,12 +33,19 @@ export default class Deleted extends React.Component {
         })
     }
 
-    onDataUpdate(taskList) {
+    /**
+     * Getting data for modal
+     * @param  {List} taskList 
+     */
+    getDataForModal(taskList) {
         this.setState({
             newTaskList: taskList
         })
     }
 
+    /**
+     * Restore all tasks
+     */
     restoreAll() {
         let data = this.state.newTaskList;
         data.isDeleted = false;
@@ -50,12 +56,14 @@ export default class Deleted extends React.Component {
         this.setState({
             newTaskList: data
         })
-        this.updateToDB(this.state.oldTaskList);
-    }
-    updateToDB(taskList) {
-        localStorage.setItem(this.state.username, JSON.stringify(taskList));
+        updateToDB(this.state.username, this.state.oldTaskList);
     }
 
+
+    /**
+     * On Task restore
+     * @param  {string} taskId 
+     */
     singleTaskRestore(taskId) {
         let data = this.state.newTaskList;
         data.tasks.forEach(value => {
@@ -69,7 +77,7 @@ export default class Deleted extends React.Component {
         this.setState({
             newTaskList: data
         })
-        this.updateToDB(this.state.oldTaskList);
+        updateToDB(this.state.username, this.state.oldTaskList);
     }
 
     render() {
@@ -80,7 +88,7 @@ export default class Deleted extends React.Component {
                     <div className="card cardContent">
                         <div className="card-body">
                             <div className="row">
-                                <TaskListCard oldTaskList={this.state.oldTaskList} from={Constant.FROM_DELETE} onDataUpdate={this.onDataUpdate.bind(this)}></TaskListCard>
+                                <TaskListCard oldTaskList={this.state.oldTaskList} from={Constant.FROM_DELETE} getDataForModal={this.getDataForModal.bind(this)}></TaskListCard>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 import React from "react";
 import * as Constant from "../../constants"
 import { TaskListCard, TaskModal } from '../../utils/task-util';
+import { getBase64, updateToDB } from '../../utils/utils'
 
 export default class Archived extends React.Component {
     constructor(props) {
@@ -42,13 +43,20 @@ export default class Archived extends React.Component {
             username: userDetails.username
         })
     }
-
-    onDataUpdate(taskList) {
+    /**
+     * Getting data for modal
+     * @param  {List} taskList 
+     */
+    getDataForModal(taskList) {
         this.setState({
             newTaskList: taskList
         })
     }
 
+    /**
+      * Save updated data to DB
+      * @param  {List} newTaskList 
+      */
     saveTaskList(newTaskList) {
         let oldTaskList = this.state.oldTaskList;
         if (newTaskList.id) {
@@ -65,7 +73,8 @@ export default class Archived extends React.Component {
             oldTaskList.push(newTaskList);
         }
 
-        this.updateToDB(oldTaskList);
+        updateToDB(this.state.username, oldTaskList);
+
         this.setState({
             newTaskList: {
                 title: '',
@@ -77,6 +86,13 @@ export default class Archived extends React.Component {
             oldTaskList: oldTaskList
         });
     }
+
+
+    /**
+     * Adding single task in list
+     * @param  {List} newTaskList 
+     * @param  {Object} taskData 
+     */
     addTask(newTaskList, taskData) {
         let task = {
             id: 'task' + new Date().valueOf(),
@@ -91,6 +107,10 @@ export default class Archived extends React.Component {
         })
     }
 
+    /**
+     * Add and remove checkbox for task
+     * @param  {List} newTaskList 
+     */
     addCheckbox(newTaskList) {
         newTaskList.isCheckbox = !newTaskList.isCheckbox;
         this.setState({
@@ -98,6 +118,11 @@ export default class Archived extends React.Component {
         })
     }
 
+    /**
+     * Update data On check change 
+     * @param  {List} newTaskList 
+     * @param  {Object} item 
+     */
     onCheckChange(newTaskList, item) {
         newTaskList.tasks.forEach(value => {
             if (item.id === value.id) {
@@ -109,6 +134,11 @@ export default class Archived extends React.Component {
         })
     }
 
+    /**
+     * Change taskList title
+     * @param  {List} newTaskList 
+     * @param  {string} title 
+     */
     onTitleChange(newTaskList, title) {
         newTaskList.title = title;
         this.setState({
@@ -116,6 +146,10 @@ export default class Archived extends React.Component {
         })
     }
 
+    /**
+     * On Task list delete
+     * @param  {Object} item 
+     */
     onDeleteClick(item) {
         let oldTaskList = this.state.oldTaskList;
         oldTaskList.forEach(value => {
@@ -129,8 +163,13 @@ export default class Archived extends React.Component {
         this.setState({
             oldTaskList: oldTaskList
         })
-        this.updateToDB(oldTaskList);
+        updateToDB(this.state.username, oldTaskList);
     }
+
+    /**
+     * On Task list Archived
+     * @param  {Object} item 
+     */
     onArchiveClick(item) {
         let oldTaskList = this.state.oldTaskList;
         oldTaskList.forEach(value => {
@@ -145,9 +184,13 @@ export default class Archived extends React.Component {
             oldTaskList: oldTaskList
         })
         // console.log(item);
-        this.updateToDB(oldTaskList);
+        updateToDB(this.state.username, oldTaskList);
     }
 
+    /**
+     * On Task deleted
+     * @param  {string} taskId 
+     */
     onTaskDelete(taskId) {
         let data = this.state.newTaskList;
         data.tasks.forEach(value => {
@@ -160,10 +203,11 @@ export default class Archived extends React.Component {
             newTaskList: data
         })
     }
-    updateToDB(taskList) {
-        localStorage.setItem(this.state.username, JSON.stringify(taskList));
-    }
 
+    /**
+     * On Task Archived
+     * @param  {string} taskId 
+     */
     onTaskArchive(taskId) {
         let data = this.state.newTaskList;
         let count = 0;
@@ -183,12 +227,18 @@ export default class Archived extends React.Component {
             newTaskList: data
         })
     }
+
+    /**
+     * Upload file to DB
+     * @param  {Object} event 
+     * @param  {string} itemId 
+     */
     onFileUpload(event, itemId) {
         let file = event.target.files[0];
 
         let newTaskList = this.state.newTaskList;;
 
-        this.getBase64(file, (result) => {
+        getBase64(file, (result) => {
             newTaskList.tasks.forEach(val => {
                 if (val.id === itemId) {
                     val.img = result
@@ -201,17 +251,6 @@ export default class Archived extends React.Component {
 
     }
 
-    getBase64(file, cb) {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function () {
-            cb(reader.result)
-        };
-        reader.onerror = function (error) {
-            console.log('Error: ', error);
-        };
-    }
-
     render() {
         let oldTaskList = this.state.oldTaskList;
 
@@ -221,7 +260,7 @@ export default class Archived extends React.Component {
                     <div className="card-body">
                         <div className="row">
 
-                            <TaskListCard oldTaskList={oldTaskList} from={Constant.FROM_ARCHIVE} onDataUpdate={this.onDataUpdate.bind(this)}></TaskListCard>
+                            <TaskListCard oldTaskList={oldTaskList} from={Constant.FROM_ARCHIVE} getDataForModal={this.getDataForModal.bind(this)}></TaskListCard>
 
                         </div>
                     </div>

@@ -4,7 +4,7 @@ import * as Constant from "../constants"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faArchive, faListUl, faTimes, faUndo, faPaperclip } from '@fortawesome/free-solid-svg-icons'
 
-export const TaskListCard = ({ oldTaskList, onDataUpdate, from }) => {
+export const TaskListCard = ({ oldTaskList, getDataForModal, from }) => {
     return oldTaskList.map(function (value, key) {
         let val;
         switch (from) {
@@ -37,7 +37,7 @@ export const TaskListCard = ({ oldTaskList, onDataUpdate, from }) => {
         return (
             val ?
                 <div key={key} className="col-sm-4 col-lg-2 col-md-3 col-xs-4">
-                    <div onClick={() => { onDataUpdate(value) }} className="card">
+                    <div onClick={() => { getDataForModal(value) }} className="card">
                         <div className="card-body cursorPointer content-justify-left "
                             style={{ height: 'auto', padding: '0.25rem', fontFamily: 'Arial' }} data-toggle="modal" data-target="#exampleModalCenter">
                             <h5> <strong> {value.title}</strong></h5>
