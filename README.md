@@ -1,49 +1,53 @@
 A web app similar to google keep functionality based on React.js.
-## Problem statement 
-* Users should be able to create an account.
 
-* User should be able to able to login into the application with credentials (email/password)
+## Problem statement
+
+- Users should be able to create an account.
+
+- User should be able to able to login into the application with credentials (email/password)
 
       (you may want the credentials to persist on local session storage for the user
       to be able to log in with their account credentials)
-    
-* Users should be able to create multiple task lists once logged in.
 
-* Each task list can have multiple tasks.
+- Users should be able to create multiple task lists once logged in.
 
-* Each task may have a image associated which should appear as thumbnail preview on the task list.
+- Each task list can have multiple tasks.
 
-* Users should be able to delete/archive tasks or task lists.
+- Each task may have a image associated which should appear as thumbnail preview on the task list.
 
-* The deleted/archived tasks/tasklists should be restorable.
+- Users should be able to delete/archive tasks or task lists.
 
-* the application state must persist on browser reload.
+- The deleted/archived tasks/tasklists should be restorable.
 
-* Make the code available publicly on the GitHub.
+- the application state must persist on browser reload.
+
+- Make the code available publicly on the GitHub.
 
 ## Solution
-* Users can create an account.
 
-* Users can login into the application with credentials (email/password).
+- Users can create an account.
 
-* Users can able to create multiple task lists once logged in.
+- Users can login into the application with credentials (email/password).
 
-* Each task list can have multiple tasks.
+- Users can able to create multiple task lists once logged in.
 
-* Each task may have a image associated which should appear as thumbnail preview on the task list.
+- Each task list can have multiple tasks.
 
-* Users can delete/archive tasks or task lists.
+- Each task may have a image associated which should appear as thumbnail preview on the task list.
 
-* The deleted/archived tasks/tasklists are restorable.
+- Users can delete/archive tasks or task lists.
 
-* the application state persist on browser reload.
+- The deleted/archived tasks/tasklists are restorable.
+
+- the application state persist on browser reload.
 
 ## How to run?
+
 Please make sure you have already installed nodejs.
 
 In the project directory, you can run:
 
-    npm start 
+    npm start
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -52,3 +56,18 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 1. Signup Screen
    ![Alt text](./screenshots/signup.png)
+
+2. Login Screen
+   ![Alt text](./screenshots/login.png)
+
+3. Home Screen
+   ![Alt text](./screenshots/home.png)
+
+4. Archived Screen
+   ![Alt text](./screenshots/archived.png)
+
+5. Deleted Screen
+   ![Alt text](./screenshots/deleted.png)
+
+6. TaskList Add Screen
+   ![Alt text](./screenshots/taskAddForm.png)
