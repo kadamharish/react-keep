@@ -42,7 +42,6 @@ A web app similar to google keep functionality based on React.js.
 
 In the project directory, you can run:
 
-### npm start 
     npm start 
 
 Runs the app in the development mode.<br />
