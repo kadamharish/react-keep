@@ -24,7 +24,7 @@ A web app similar to google keep functionality based on React.js.
 ## Solution
 * Users can create an account.
 
-* Users can login into the application with credentials. (email/password)
+* Users can login into the application with credentials (email/password).
 
 * Users can able to create multiple task lists once logged in.
 
@@ -38,7 +38,8 @@ A web app similar to google keep functionality based on React.js.
 
 * the application state persist on browser reload.
 
-## How to run ?
+## How to run?
+Please make sure you have already installed nodejs.
 
 In the project directory, you can run:
 
