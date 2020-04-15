@@ -3,7 +3,7 @@ A web app similar to google keep functionality based on React.js.
 
 -> Users can to create an account.
 
--> User can login into the application with credentials. (email/password)
+-> Users can login into the application with credentials. (email/password)
 
 -> Users can able to create multiple task lists once logged in.
 
