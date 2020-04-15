@@ -4,20 +4,20 @@ A web app similar to google keep functionality based on React.js.
 
 * User should be able to able to login into the application with credentials (email/password)
 
-    (you may want the credentials to persist on local session storage for the user
-    to be able to log in with their account credentials)
+      (you may want the credentials to persist on local session storage for the user
+      to be able to log in with their account credentials)
     
 * Users should be able to create multiple task lists once logged in.
 
-* Each task list can have multiple tasks
+* Each task list can have multiple tasks.
 
-* Each task may have a image associated which should appear as thumbnail preview on the task list
+* Each task may have a image associated which should appear as thumbnail preview on the task list.
 
 * Users should be able to delete/archive tasks or task lists.
 
 * The deleted/archived tasks/tasklists should be restorable.
 
-* the application state must persist on browser reload
+* the application state must persist on browser reload.
 
 * Make the code available publicly on the GitHub.
 
