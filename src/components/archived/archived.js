@@ -87,7 +87,7 @@ export default class Archived extends React.Component {
             },
             oldTaskList: oldTaskList
         });
-        toast.success("Task list updated.");
+        toast.success(Constant.INFO_TASK_UPDATE);
 
     }
 
@@ -109,7 +109,7 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: newTaskList
         })
-        toast.info("Click save button to update changes.");
+        toast.info(Constant.INFO_SAVE_BUTTON);
 
     }
 
@@ -122,7 +122,7 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: newTaskList
         })
-        toast.info("Click save button to update changes.");
+        toast.info(Constant.INFO_SAVE_BUTTON);
 
     }
 
@@ -210,7 +210,7 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: data
         })
-        toast.info("Click save button to update changes.");
+        toast.info(Constant.INFO_SAVE_BUTTON);
 
     }
 
@@ -236,7 +236,7 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: data
         })
-        toast.info("Click save button to update changes.");
+        toast.info(Constant.INFO_SAVE_BUTTON);
 
     }
 
@@ -260,7 +260,7 @@ export default class Archived extends React.Component {
                 newTaskList: newTaskList
             })
         });
-        toast.info("Click save button to update changes.");
+        toast.info(Constant.INFO_SAVE_BUTTON);
 
     }
 
