@@ -13,6 +13,8 @@ import Dashboard from "./components/dashboard/dashboard";
 import PrivateRoute from "./services/private-route";
 import { ToastContainer } from 'react-toastify';
 
+// Returns App function with routing.
+
 function App() {
   return (
     <div>

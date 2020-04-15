@@ -5,7 +5,7 @@ import { TaskListCard, ModalDismissButton } from '../../utils/task-util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashRestore } from '@fortawesome/free-solid-svg-icons'
 import { updateToDB } from '../../utils/utils'
-
+// Exporting Delete class with Restore task functionality.
 export default class Deleted extends React.Component {
     constructor(props) {
         super(props);

@@ -5,6 +5,7 @@ import { TaskListCard, TaskModal } from '../../utils/task-util';
 import { getBase64, updateToDB } from '../../utils/utils'
 import { toast } from 'react-toastify';
 
+//Exporting Archived class with task/tasklist manipulation functionality.
 export default class Archived extends React.Component {
     constructor(props) {
         super(props);

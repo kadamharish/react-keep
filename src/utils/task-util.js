@@ -4,6 +4,8 @@ import * as Constant from "../constants"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faArchive, faListUl, faTimes, faUndo, faPaperclip } from '@fortawesome/free-solid-svg-icons'
 
+
+// Returns task list card.
 export const TaskListCard = ({ oldTaskList, getDataForModal, from }) => {
     return oldTaskList.map(function (value, key) {
         let val;
@@ -51,10 +53,9 @@ export const TaskListCard = ({ oldTaskList, getDataForModal, from }) => {
     })
 }
 
-
+// Returns Task with image associated.
 const TaskImageList = ({ tasks, from }) => {
-    // Map through the todos
-
+    // Map through the tasks
     const task = tasks.map(function (item, key) {
         let val;
         switch (from) {
@@ -88,8 +89,9 @@ const TaskImageList = ({ tasks, from }) => {
     );
 }
 
-
-export const TaskModal = ({ from, state, onTitleChange, addTask, onCheckChange, onDeleteClick, onArchiveClick, addCheckbox, saveTaskList, onTaskDelete, onTaskArchive, onFileUpload }) => {
+// Returns modal with tasklist details on home and archived page.
+export const TaskModal = ({ from, state, onTitleChange, addTask, onCheckChange, onDeleteClick,
+    onArchiveClick, addCheckbox, saveTaskList, onTaskDelete, onTaskArchive, onFileUpload }) => {
     let newTaskList = state.newTaskList;
     let task;
 
@@ -157,7 +159,7 @@ export const TaskModal = ({ from, state, onTitleChange, addTask, onCheckChange, 
     );
 }
 
-
+// Returns tasks with or without checkbox depending on condition.
 export const CustomCheckbox = ({ from, newTaskList, onCheckChange, onTaskDelete, onTaskArchive, onFileUpload }) => {
     // Map through the todos
     const task = newTaskList.tasks.map(function (item, key) {
@@ -205,6 +207,7 @@ export const CustomCheckbox = ({ from, newTaskList, onCheckChange, onTaskDelete,
     );
 }
 
+// Returns Action buttons like delete and Archive.
 export const ActionButtons = ({ itemID, from, onTaskDelete, onTaskArchive, onFileUpload }) => {
     let fileType;
 
@@ -223,10 +226,12 @@ export const ActionButtons = ({ itemID, from, onTaskDelete, onTaskArchive, onFil
     )
 }
 
+// Returns Image tag.
 export const Image = ({ url }) => {
     return <img height="25" width="25" className="media-object" src={url} alt="..." />
 }
 
+// Returns Modal Dismiss button
 export function ModalDismissButton() {
     return <button type="button" className="btn btn-light btn-sm" data-dismiss="modal">Close</button>
 }

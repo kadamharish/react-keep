@@ -4,6 +4,7 @@ import './signup.css';
 import { withRouter, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+// Exporting signup class
 class Signup extends React.Component {
 
     constructor(props) {
@@ -11,6 +12,7 @@ class Signup extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.state = { name: '', username: '', password: '', errors: '' };
     }
+
     componentDidMount() {
         const data = JSON.parse(localStorage.getItem(Constant.USER_DETAILS));
         const userData = data ? data : [];
@@ -19,6 +21,10 @@ class Signup extends React.Component {
         })
     }
 
+    /**
+     * Handling input change events.
+     * @param  {Object} event 
+     */
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -31,6 +37,11 @@ class Signup extends React.Component {
 
         });
     }
+
+    /**
+     * Form submit function with validation check.
+     * @param  {Object} event 
+     */
     formSubmit = (event) => {
         event.preventDefault();
         if (!validateForm(this.state.errors)) {
@@ -41,17 +52,20 @@ class Signup extends React.Component {
         delete data['errors'];
         this.state.userData.push(data);
         localStorage.setItem(Constant.USER_DETAILS, JSON.stringify(this.state.userData));
-        toast.success("User successfully created.");
+        toast.success(SUCCESS_USER_CREATED);
         this.props.history.push('/login');
     }
 
+    /**
+     * Function for verifying username with DB.
+     */
     verifyUsername() {
         let data = this.state.userData.filter(value => {
             return (value.username === this.state.username)
         })
         if (data.length > 0) {
             this.setState({
-                errors: 'Username already exist..!!'
+                errors: Constant.ERROR_USERNAME_EXIST
             });
         }
     }
@@ -103,6 +117,7 @@ class Signup extends React.Component {
     }
 }
 
+// Validation errors before form submtting. 
 const validateForm = (errors) => {
     let valid = true;
     if (errors.length > 0) {

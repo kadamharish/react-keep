@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import * as Constant from '../constants'
 
+// Exporting private route function for validating routes. 
 function PrivateRoute({ component: Component, ...rest }) {
     let data = sessionStorage.getItem(Constant.USER_DETAILS)
     return (

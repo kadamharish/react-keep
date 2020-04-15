@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter, NavLink } from 'react-router-dom';
 import * as Constant from "../../constants"
 
+// Custom header class with navigation links
 
 class CustomHeader extends React.Component {
 
@@ -10,7 +11,9 @@ class CustomHeader extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-
+  /**
+   * This function will remove data from session and redirect to login. 
+   */
   logout() {
     sessionStorage.removeItem(Constant.USER_DETAILS);
     this.props.history.push('/login');

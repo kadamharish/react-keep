@@ -3,7 +3,7 @@ import "./login.css";
 import * as Constant from '../../constants';
 import { withRouter, Link } from 'react-router-dom';
 
-
+// Exporting Login Class.
 class Login extends React.Component {
 
     constructor(props) {
@@ -20,6 +20,10 @@ class Login extends React.Component {
         })
     }
 
+    /**
+     * Handling input change events.
+     * @param  {Object} event 
+     */
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -36,6 +40,11 @@ class Login extends React.Component {
             errors = 'Invalid username or password.';
         }
     }
+
+    /**
+     * Form submit function with validation check.
+     * @param  {Object} event 
+     */
     formSubmit = (event) => {
         event.preventDefault();
         if (this.state.errors && this.state.errors.length > 0) {
