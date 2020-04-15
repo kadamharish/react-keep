@@ -4,7 +4,8 @@ A web app similar to google keep functionality based on React.js.
 
 -> User should be able to able to login into the application with credentials (email/password)
 
-    (you may want the credentials to persist on local session storage for the user to be able to log in with their account credentials)
+    (you may want the credentials to persist on local session storage for the user
+    to be able to log in with their account credentials)
     
 -> Users should be able to create multiple task lists once logged in.
 
@@ -37,11 +38,12 @@ A web app similar to google keep functionality based on React.js.
 
 -> the application state persist on browser reload.
 
-## How to run
+## How to run ?
 
 In the project directory, you can run:
 
-### `npm start`
+### npm start 
+    npm start 
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
