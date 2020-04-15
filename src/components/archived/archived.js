@@ -3,6 +3,7 @@ import React from "react";
 import * as Constant from "../../constants"
 import { TaskListCard, TaskModal } from '../../utils/task-util';
 import { getBase64, updateToDB } from '../../utils/utils'
+import { toast } from 'react-toastify';
 
 export default class Archived extends React.Component {
     constructor(props) {
@@ -85,6 +86,8 @@ export default class Archived extends React.Component {
             },
             oldTaskList: oldTaskList
         });
+        toast.success("Task list updated.");
+
     }
 
 
@@ -105,6 +108,8 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: newTaskList
         })
+        toast.info("Click save button to update changes.");
+
     }
 
     /**
@@ -116,6 +121,8 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: newTaskList
         })
+        toast.info("Click save button to update changes.");
+
     }
 
     /**
@@ -202,6 +209,8 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: data
         })
+        toast.info("Click save button to update changes.");
+
     }
 
     /**
@@ -226,6 +235,8 @@ export default class Archived extends React.Component {
         this.setState({
             newTaskList: data
         })
+        toast.info("Click save button to update changes.");
+
     }
 
     /**
@@ -248,6 +259,7 @@ export default class Archived extends React.Component {
                 newTaskList: newTaskList
             })
         });
+        toast.info("Click save button to update changes.");
 
     }
 

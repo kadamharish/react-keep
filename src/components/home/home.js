@@ -5,6 +5,7 @@ import * as Constant from "../../constants"
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { TaskListCard, TaskModal } from '../../utils/task-util';
 import { getBase64, updateToDB } from '../../utils/utils'
+import { toast } from 'react-toastify';
 
 export default class Home extends React.Component {
 
@@ -106,6 +107,8 @@ export default class Home extends React.Component {
             },
             oldTaskList: oldTaskList
         });
+        toast.success("Task list updated.");
+
     }
 
     /**
@@ -126,6 +129,7 @@ export default class Home extends React.Component {
         this.setState({
             newTaskList: newTaskList
         })
+        toast.info("Click save button to update changes.");
     }
 
     /**
@@ -137,6 +141,7 @@ export default class Home extends React.Component {
         this.setState({
             newTaskList: newTaskList
         })
+        toast.info("Click save button to update changes.");
     }
 
     /**
@@ -224,7 +229,7 @@ export default class Home extends React.Component {
         this.setState({
             newTaskList: data
         })
-
+        toast.info("Click save button to update changes.");
     }
     /**
      * Upload file to DB
@@ -246,6 +251,7 @@ export default class Home extends React.Component {
                 newTaskList: newTaskList
             })
         });
+        toast.info("Click save button to update changes.");
 
     }
 
@@ -263,6 +269,7 @@ export default class Home extends React.Component {
         this.setState({
             newTaskList: data
         })
+        toast.info("Click save button to update changes.");
 
     }
 

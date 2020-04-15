@@ -2,7 +2,6 @@
 import React from "react";
 import * as Constant from "../../constants"
 import { TaskListCard, ModalDismissButton } from '../../utils/task-util';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashRestore } from '@fortawesome/free-solid-svg-icons'
 import { updateToDB } from '../../utils/utils'

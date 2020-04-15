@@ -2,6 +2,7 @@ import React from 'react'
 import * as Constant from '../../constants'
 import './signup.css';
 import { withRouter, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class Signup extends React.Component {
 
@@ -40,6 +41,7 @@ class Signup extends React.Component {
         delete data['errors'];
         this.state.userData.push(data);
         localStorage.setItem(Constant.USER_DETAILS, JSON.stringify(this.state.userData));
+        toast.success("User successfully created.");
         this.props.history.push('/login');
     }
 
