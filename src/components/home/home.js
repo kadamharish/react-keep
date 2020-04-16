@@ -3,7 +3,7 @@ import React from "react";
 import "./home.css";
 import * as Constant from "../../constants"
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { TaskListCard, TaskModal } from '../../utils/task-util';
+import { TaskListCard, TaskModal, ImagePreviewModal } from '../../utils/task-util';
 import { getBase64, updateToDB } from '../../utils/utils'
 import { toast } from 'react-toastify';
 
@@ -21,9 +21,13 @@ export default class Home extends React.Component {
         this.onTaskDelete = this.onTaskDelete.bind(this);
         this.onTaskArchive = this.onTaskArchive.bind(this);
         this.onFileUpload = this.onFileUpload.bind(this);
+        this.openImageModal = this.openImageModal.bind(this);
         this.state = {
             isNew: true,
             username: '',
+            task: {
+                img: ''
+            },
             newTaskList: {
                 id: '',
                 title: '',
@@ -274,6 +278,13 @@ export default class Home extends React.Component {
 
     }
 
+    openImageModal(task) {
+        this.setState({
+            task: task
+        })
+        console.log(task)
+    }
+
     render() {
         let oldTaskList = this.state.oldTaskList;
         return (
@@ -296,7 +307,10 @@ export default class Home extends React.Component {
                         </div>
                     </div>
                 </section>
-                <TaskModal from={Constant.FROM_HOME} state={this.state} onTitleChange={this.onTitleChange} addTask={this.addTask}
+
+                <ImagePreviewModal src={this.state.task.img}></ImagePreviewModal>
+
+                <TaskModal openImageModal={this.openImageModal} from={Constant.FROM_HOME} state={this.state} onTitleChange={this.onTitleChange} addTask={this.addTask}
                     onCheckChange={this.onCheckChange.bind(this)} onDeleteClick={this.onDeleteClick} onArchiveClick={this.onArchiveClick}
                     addCheckbox={this.addCheckbox} saveTaskList={this.saveTaskList} onTaskDelete={this.onTaskDelete} onTaskArchive={this.onTaskArchive} onFileUpload={this.onFileUpload} >
                 </TaskModal>

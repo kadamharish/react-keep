@@ -90,7 +90,7 @@ const TaskImageList = ({ tasks, from }) => {
 }
 
 // Returns modal with tasklist details on home and archived page.
-export const TaskModal = ({ from, state, onTitleChange, addTask, onCheckChange, onDeleteClick,
+export const TaskModal = ({ openImageModal, from, state, onTitleChange, addTask, onCheckChange, onDeleteClick,
     onArchiveClick, addCheckbox, saveTaskList, onTaskDelete, onTaskArchive, onFileUpload }) => {
     let newTaskList = state.newTaskList;
     let task;
@@ -127,7 +127,7 @@ export const TaskModal = ({ from, state, onTitleChange, addTask, onCheckChange, 
                             </div>
                             <hr style={{ marginBottom: '0.25rem', marginTop: '0.25rem' }}></hr>
 
-                            <CustomCheckbox from={from} newTaskList={newTaskList} onCheckChange={onCheckChange} onTaskDelete={onTaskDelete} onTaskArchive={onTaskArchive} onFileUpload={onFileUpload}  ></CustomCheckbox>
+                            <CustomCheckbox openImageModal={openImageModal} from={from} newTaskList={newTaskList} onCheckChange={onCheckChange} onTaskDelete={onTaskDelete} onTaskArchive={onTaskArchive} onFileUpload={onFileUpload}  ></CustomCheckbox>
 
                         </form>
 
@@ -160,7 +160,7 @@ export const TaskModal = ({ from, state, onTitleChange, addTask, onCheckChange, 
 }
 
 // Returns tasks with or without checkbox depending on condition.
-export const CustomCheckbox = ({ from, newTaskList, onCheckChange, onTaskDelete, onTaskArchive, onFileUpload }) => {
+export const CustomCheckbox = ({ openImageModal, from, newTaskList, onCheckChange, onTaskDelete, onTaskArchive, onFileUpload }) => {
     // Map through the todos
     const task = newTaskList.tasks.map(function (item, key) {
         let val;
@@ -175,13 +175,14 @@ export const CustomCheckbox = ({ from, newTaskList, onCheckChange, onTaskDelete,
             default:
                 val = false;
         }
+        console.log(item.img);
         return (
             val ?
                 newTaskList.isCheckbox ?
                     <div key={key} className="form-check media">
                         <div className="media-left">
                             <input key={key} type="checkbox" className="form-check-input" checked={item.isCompleted} onChange={() => { onCheckChange(newTaskList, item) }} id={`defaultCheck` + key} />
-                            {item.img ? <Image url={item.img} ></Image> : ''}
+                            {item.img ? <ImageModal item={item} openImageModal={openImageModal}></ImageModal> : ''}
                             <label htmlFor={`defaultCheck` + key}>
                                 {item.isCompleted ? <del>{item.text}</del> : item.text}
                             </label>
@@ -191,7 +192,7 @@ export const CustomCheckbox = ({ from, newTaskList, onCheckChange, onTaskDelete,
                         </div>
                     </div>
                     : <li key={key} className="media" style={{ marginBottom: '5px' }}>
-                        <div className="media-left">  {item.img ? <Image url={item.img} ></Image> : ''}
+                        <div className="media-left">  {item.img ? <ImageModal item={item} openImageModal={openImageModal} ></ImageModal> : ''}
                             {item.text}</div>
                         <div className="media-body">
                             <ActionButtons itemID={item.id} from={from} onTaskDelete={onTaskDelete} onTaskArchive={onTaskArchive} onFileUpload={onFileUpload} ></ActionButtons>
@@ -231,7 +232,35 @@ export const Image = ({ url }) => {
     return <img height="25" width="25" className="media-object" src={url} alt="..." />
 }
 
+// Returns Image tag.
+export const ImageModal = ({ item, openImageModal }) => {
+    return <img onClick={() => openImageModal(item)} data-toggle="modal" data-target="#exampleModal" height="25" width="25" className="media-object" src={item.img} alt="..." />
+}
+
 // Returns Modal Dismiss button
 export function ModalDismissButton() {
     return <button type="button" className="btn btn-light btn-sm" data-dismiss="modal">Close</button>
+}
+
+export const ImagePreviewModal = ({ src }) => {
+    return (
+        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" style={{ zIndex: '10000' }} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content modal-contentTopMargin">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Image</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <img height='100%' width='100%' src={src}></img>
+                    </div>
+                    <div className="modal-footer" style={{ padding: '0' }}>
+                        <ModalDismissButton></ModalDismissButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
